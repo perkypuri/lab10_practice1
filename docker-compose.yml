@@ -12,13 +12,20 @@ services:
     networks:
       - springboot-mysql-net
 
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   backend:
     image: perkypuri/docker-backend:latest
     container_name: springboot
     ports:
       - "2025:2000"
     depends_on:
-      - mysqldb
+      mysqldb:
+        condition: service_healthy
     restart: on-failure
     networks:
       - springboot-mysql-net
