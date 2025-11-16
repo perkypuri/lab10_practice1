@@ -22,7 +22,7 @@ services:
     image: perkypuri/docker-backend:latest
     container_name: springboot
     ports:
-      - "2025:2000"
+      - "2024:2000"
     depends_on:
       mysqldb:
         condition: service_healthy
@@ -34,7 +34,7 @@ services:
     image: perkypuri/docker-frontend:latest
     container_name: react
     ports:
-      - "3000:80"
+      - "3002:80"
     depends_on:
       - backend
     restart: on-failure
